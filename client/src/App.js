@@ -83,13 +83,12 @@ function App() {
           transform: "translate(-50%, -50%)",
           backgroundColor: "beige",
           width: "20rem",
-          height: "15rem",
           flexDirection:"column",
           alignContent:"center",
           padding:"1rem"
-        }}>OH NO! there has been an error:<br />{error?.message}
+        }}><b>OH NO!</b> there has been an error:<br />{error?.message}
         <br />please try again... we really want to help you protect your password! <br />
-        <img src="https://media.tenor.com/yRM6-XRvkM4AAAAi/error-gmod.gif" /></div>
+        <img style={{height:"8rem"}} src="https://media.tenor.com/yRM6-XRvkM4AAAAi/error-gmod.gif" /></div>
       </body >
     </>
   );
