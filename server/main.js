@@ -21,8 +21,6 @@ app.post("/api/get-answer", (req, res) => {
 })
 
 
-
-
 server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`)
 });
