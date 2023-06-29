@@ -22,7 +22,7 @@ pipeline {
                     docker container prune --force 
                     docker run --name client-build client:latest
                     docker cp client-build:app/build ./client-build
-                    serve ./client-build
+                    serve -s ./client-build
                 '''
             }
         }
