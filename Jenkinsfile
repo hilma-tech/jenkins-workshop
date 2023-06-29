@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo "serveing client..."
                 sh '''
-                    docker run --name client-build -d client:latest
+                    docker run --name client-build client:latest
                     docker cp client-build:app/build ./client-build
                     serve ./client-build
                 '''
