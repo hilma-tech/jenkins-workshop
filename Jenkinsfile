@@ -44,16 +44,16 @@ pipeline {
             steps {
                 echo 'deploying'
                 sh """
-                    docker stop server
-                    docker rm server
-                    docker run -d -p $PORT:8000 server:latest
+                    docker stop server-container
+                    docker rm server-container
+                    docker run -d -p $PORT:8000 --name server-container server:latest
                 """
             }
         }
 
         stage('health check') {
             steps {
-                echo "health check:)"
+                echo 'health check:)'
                 sh """
                     wget http://localhost:$PORT/api/health;
                     if [ \$? = 0 ]; 
