@@ -45,10 +45,7 @@ pipeline {
                 script {
                     echo 'deploying'
                     try{
-                        sh '''
-                        docker stop server-container
-                        docker rm server-container
-                        '''
+                        sh 'docker stop server-container || true && docker rm server-container || true'
                     }
                     catch(error){
                         echo error
