@@ -34,7 +34,7 @@ pipeline {
         stage('building server') {
             steps {
                 sh '''
-                    cd ../server
+                    cd server
                     echo building docker image
                     docker build -t server:latest .
                 '''
