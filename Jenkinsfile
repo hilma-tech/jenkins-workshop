@@ -4,14 +4,14 @@ pipeline {
         PORT = 8010
     }
     stages {
-        stage('build docker images') {
+        stage('build client') {
             steps {
                 echo 'Building Client'
                   sh '''
                     cd client
                     echo building docker image
                     docker build -t client:latest .
-                    echo building & copying react build...
+                    echo building \\& copying react build...
                     docker run --name client-build client:latest
                     docker cp client-build:app/build ../server/client-build
                     echo finished copying, deleting stopped container
@@ -19,7 +19,7 @@ pipeline {
                 '''
             }
         }
-        stage('Building Server') {
+        stage('building server') {
             steps {
                 sh '''
                     cd ../server
@@ -28,7 +28,7 @@ pipeline {
                 '''
             }
         }
-        stage('Deploy server') {
+        stage('deploy server') {
             steps {
                 echo 'deploying'
                 sh """
@@ -37,7 +37,7 @@ pipeline {
             }
         }
 
-        stage('Health check') {
+        stage('health check') {
             steps {
                 echo "health check:)"
                 sh """
