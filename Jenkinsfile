@@ -42,19 +42,21 @@ pipeline {
         }
         stage('deploy server') {
             steps {
-                echo 'deploying'
-                try{
-                    sh '''
-                    docker stop server-container
-                    docker rm server-container
-                    '''
+                script {
+                    echo 'deploying'
+                    try{
+                        sh '''
+                        docker stop server-container
+                        docker rm server-container
+                        '''
+                    }
+                    catch(error){
+                        echo error
+                    }
+                    sh """
+                        docker run -d -p $PORT:8000 --name server-container server:latest
+                    """
                 }
-                catch(error){
-                    echo error
-                }
-                sh """
-                    docker run -d -p $PORT:8000 --name server-container server:latest
-                """
             }
         }
 
