@@ -44,6 +44,8 @@ pipeline {
             steps {
                 echo 'deploying'
                 sh """
+                    docker stop server
+                    docker rm server
                     docker run -d -p $PORT:8000 server:latest
                 """
             }
