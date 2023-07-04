@@ -7,6 +7,8 @@ pipeline {
         stage('build client') {
             steps {
                 echo 'Building Client'
+                try {
+
                   sh '''
                     cd client
                     echo building docker image
@@ -17,6 +19,15 @@ pipeline {
                     echo finished copying, deleting stopped container
                     docker container rm client-build 
                 '''
+                } catch (error2) {
+                    try {
+                        sh 'docker container rm client-build'
+                    }
+                    catch(error1) {
+                        echo error1
+                    }
+                    error error2
+                }
             }
         }
         stage('building server') {
