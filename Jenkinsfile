@@ -6,27 +6,28 @@ pipeline {
     stages {
         stage('build client') {
             steps {
-                echo 'Building Client'
-                try {
-
-                  sh '''
-                    cd client
-                    echo building docker image
-                    docker build -t client:latest .
-                    echo building \\& copying react build...
-                    docker run --name client-build client:latest
-                    docker cp client-build:app/build ../server/client-build
-                    echo finished copying, deleting stopped container
-                    docker container rm client-build 
-                '''
-                } catch (error2) {
+                script {
+                    echo 'Building Client'
                     try {
-                        sh 'docker container rm client-build'
+                        sh '''
+                            cd client
+                            echo building docker image
+                            docker build -t client:latest .
+                            echo building \\& copying react build...
+                            docker run --name client-build client:latest
+                            docker cp client-build:app/build ../server/client-build
+                            echo finished copying, deleting stopped container
+                            docker container rm client-build 
+                        '''
+                    } catch (error2) {
+                        try {
+                            sh 'docker container rm client-build'
+                        }
+                        catch(error1) {
+                            echo error1
+                        }
+                        error error2
                     }
-                    catch(error1) {
-                        echo error1
-                    }
-                    error error2
                 }
             }
         }
