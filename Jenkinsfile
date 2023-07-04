@@ -20,12 +20,7 @@ pipeline {
                             docker container rm client-build 
                         '''
                     } catch (error2) {
-                        try {
-                            sh 'docker container rm client-build'
-                        }
-                        catch(error1) {
-                            echo error1
-                        }
+                        sh 'docker container rm client-build || true'
                         error error2
                     }
                 }
