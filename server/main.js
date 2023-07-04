@@ -1,5 +1,7 @@
 const http = require('http');
 const express = require('express');
+const path = require("path");
+
 const app = express();
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
@@ -20,8 +22,15 @@ app.post("/api/get-answer", (req, res) => {
     res.send("i do :)")
 })
 
+app.use(express.static(path.join(__dirname, "client-build")));
+
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname,  "client-build", "index.html"));
+});
 
 server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`)
 });
+
+
 

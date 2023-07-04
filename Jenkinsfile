@@ -6,44 +6,46 @@ pipeline {
     stages {
         stage('build docker images') {
             steps {
-                echo 'Building..'
+                echo 'Building Client'
                   sh '''
                     cd client
+                    echo building docker image
                     docker build -t client:latest .
-                    cd ../server
-                    docker build -t server:latest .
+                    echo building & copying react build...
+                    docker run --name client-build client:latest
+                    docker cp client-build:app/build ../server/client-build
+                    echo finished copying, deleting stopped container
+                    docker container rm client-build 
                 '''
             }
         }
-        stage('Serve client') {
+        stage('Building Server') {
             steps {
-                echo "serveing client..."
                 sh '''
-                    docker container prune --force 
-                    docker run --name client-build client:latest
-                    docker cp client-build:app/build ./client-build
-                    serve -s ./client-build
+                    cd ../server
+                    echo building docker image
+                    docker build -t server:latest .
                 '''
             }
         }
         stage('Deploy server') {
             steps {
                 echo 'deploying'
-                sh '''
-                    docker run -d -p 8010:8000 server:latest
-                '''
+                sh """
+                    docker run -d -p $PORT:8000 server:latest
+                """
             }
         }
 
         stage('Health check') {
             steps {
                 echo "health check:)"
-                sh '''
+                sh """
                     wget http://localhost:$PORT/api/health;
-                    if [ $? = 0 ]; 
+                    if [ \$? = 0 ]; 
                     then echo SUCCESS;
                     else echo FAILED:(;
-                '''
+                """
             }
         }
     }
