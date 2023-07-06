@@ -11,9 +11,9 @@ pipeline {
                 script {
                     echo 'Building Client'
                     sh '''
-                    docker build -t ohad-jenkins;
-                    docker run -name ohad-jenkins-container ohad-image
-                    docker cp ohad-jenkins-container:app/build ./server/client-build
+                    docker build -t ohadJenkinsImage.;
+                    docker run --name ohadJenkinsContainer ohadJenkinsImage
+                    docker cp ohadJenkinsContainer:app/build ../server/client-build
                     '''
                 }
             }
