@@ -12,7 +12,7 @@ pipeline {
                     cd client
                     docker image build -t client .
                     docker run --name yehonatan client:latest
-                    docker cp yehonatan:app/build ../server/client-build
+                    docker cp yehonatan:app/build ../server/build
                     '''
                 }
             }
@@ -20,10 +20,10 @@ pipeline {
         stage('building server') {
             steps {
                 sh """
-cd server
-echo building docker image
-docker image build -t server .
-docker run -d -p$PORT:8000 --name yehonatan server:latest
+                    cd server
+                    echo building docker image
+                    docker image build -t server .
+                    docker run -d -p$PORT:8000 --name yehonatan server:latest
 """
             }
         }
