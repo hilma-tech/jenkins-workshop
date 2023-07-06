@@ -10,7 +10,7 @@ script {
 echo 'Building Client'
 sh '''
 cd client
-docker build -t noya-docker ./Dockerfile
+docker build -t noya-docker .
 docker run —name noya-container noya-docker
 docker cp noya-container:app/build ../server/client-build
 
@@ -25,7 +25,7 @@ steps {
 sh '''
 cd server
 echo building docker image
-docker build -t noya-docker-server ./Dockerfile
+docker build -t noya-docker-server .
 ....
 '''
 }

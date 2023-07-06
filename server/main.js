@@ -6,30 +6,30 @@ const app = express();
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
 
-const cors = require("cors")
+const cors = require("cors");
 
-const PORT = Number(process.env.PORT) || 8000;
-app.use(cors())
-app.use(bodyParser.json())
+const PORT = Number(process.env.PORT) || 8088;
+app.use(cors());
+app.use(bodyParser.json());
 
 
 app.get('/api/health', (req, res) => {
-    res.sendStatus(200)
-})
+    res.sendStatus(200);
+});
 
 app.post("/api/get-answer", (req, res) => {
     console.log(req.body);
-    res.send("i do :)")
-})
+    res.send("i do :)");
+});
 
 app.use(express.static(path.join(__dirname, "client-build")));
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname,  "client-build", "index.html"));
+    res.sendFile(path.join(__dirname, "client-build", "index.html"));
 });
 
 server.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`)
+    console.log(`App listening on port ${PORT}`);
 });
 
 
