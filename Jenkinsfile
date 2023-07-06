@@ -9,7 +9,7 @@ pipeline {
                 script {
                     echo 'Building Client'
                     sh '''
-                    cd client
+                        cd client
                         docker build -t ziv_image .
                         docker run --name ziv_image ziv_container
                         docker cp ziv_container:app/build ../server/client-build
