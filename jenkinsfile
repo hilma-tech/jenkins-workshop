@@ -22,7 +22,7 @@ pipeline {
                 sh '''
 cd server
 docker build -t server-tt .
-docker run -d -p 8043:8000 -n korenContainer server-tt
+docker run -d -p 8043:8000 - -name server-tt
 '''
             }
         }
