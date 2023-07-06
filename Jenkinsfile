@@ -33,7 +33,7 @@ steps {
 script {
 echo 'deploying'
 sh '''
-docker container rm noya-container || true
+docker container rm noya-container-server || true
 docker run -d -p 8088:8000 --name noya-container-server noya-docker-server
 '''
 }
@@ -44,6 +44,7 @@ stage('health check') {
 steps {
 echo 'health check:)'
 sh """
+sleep 20
 wget http://localhost:$PORT/api/health;
 if [ \$? = 0 ];
 then echo SUCCESS;
