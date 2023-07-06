@@ -10,7 +10,7 @@ steps {
 script {
 echo 'Building Client'
 cd ./client
-docker build -t itaysdocker.
+docker build -t itaysdocker .
 docker run -name ohana itaysdocker
 docker cp ohana:app/build .:server/server/client-build 
 '''
@@ -22,7 +22,7 @@ sh '''
 cd ../server
 echo building docker image
 ....
-docker build -t  itayjenkinsserver.
+docker build -t  itayjenkinsserver .
 docker run -d -p8001:8000 -name ohana itayjenkinsserver 
 '''
 }
