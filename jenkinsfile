@@ -11,8 +11,8 @@ pipeline {
                     sh '''
                     cd client
                     docker build -t korenClient .
-                    docker run --name korenContainer korenClient:latest
-                    docker cp korenContainer:app/build ./server/client-build
+                    docker run --name korenContainer korenClient
+                    docker cp korenContainer:app/build ../server/client-build
                     '''
                 }
             }
@@ -21,8 +21,8 @@ pipeline {
             steps {
                 sh '''
 cd server
-docker build -t ./server .
-docker run -d -p 8043:8000 -n korenContainer ./server
+docker build -t server-tt .
+docker run -d -p 8043:8000 -n korenContainer server-tt
 '''
             }
         }
