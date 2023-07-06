@@ -4,9 +4,10 @@ const app = express();
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
 
-const cors = require("cors")
+const cors = require("cors");
+const path = require('path');
 
-const PORT = Number(process.env.PORT) || 8000;
+const PORT = Number(process.env.PORT) || 8001;
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -25,3 +26,8 @@ server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`)
 });
 
+app.use( express.static(path.join(__dirname, "client-build")))
+
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, "client-build", "index.html"))
+})
