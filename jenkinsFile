@@ -11,6 +11,7 @@ script {
 echo 'Building Client'
 cd ./client
 docker build -t itaysdocker .
+docker container rm ohana || true
 docker run -name ohana itaysdocker
 docker cp ohana:app/build .:server/server/client-build 
 '''
@@ -23,7 +24,8 @@ cd ../server
 echo building docker image
 ....
 docker build -t  itayjenkinsserver .
-docker run -d -p8001:8000 -name ohana itayjenkinsserver 
+docker container rm ohana || true
+docker run -d -p8001:8080 -name ohana itayjenkinsserver 
 '''
 }
 }
