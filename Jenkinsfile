@@ -10,7 +10,7 @@ pipeline {
                     echo 'Building Client'
                     sh '''
                         docker build -t amit-docker-jenkins-workshop
-                        docker run -name amit-container amit-docker-jenkins-workshop
+                        docker run - -name amit-container amit-docker-jenkins-workshop
                         docker cp amit-container:app/build./server/client-build
                     '''
 
@@ -23,7 +23,7 @@ pipeline {
                     echo building docker image
                     build abd run server
                     docker build -t amit-server .
-                    docker run -d -p 8023:8000 -name amit-server
+                    docker run -d -p 8023:8000 - -name amit-server
                     ....
                 '''
             }
