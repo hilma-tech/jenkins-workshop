@@ -11,6 +11,7 @@ echo 'Building Client'
 sh '''
 cd client
 docker build -t noya-docker .
+docker container rm noya-container || true
 docker run --name noya-container noya-docker
 docker cp noya-container:app/build ../server/client-build
 
@@ -23,7 +24,7 @@ docker cp noya-container:app/build ../server/client-build
 stage('building server') {
 steps {
 sh '''
-cd server
+cd server 
 echo building docker image
 docker build -t noya-docker-server .
 '''
@@ -34,6 +35,7 @@ steps {
 script {
 echo 'deploying'
 sh '''
+docker container rm noya-container || true
 docker run -d -p 8088:8000 --name noya-container-server noya-docker-server
 '''
 }
