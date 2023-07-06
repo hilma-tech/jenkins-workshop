@@ -8,16 +8,21 @@ stage('build client') {
 steps {
 script {
 echo 'Building Client'
-}
+cd client
+docker build -t itaysDocker
+docker run -name ohana itaysDocker
+docker cp ohana:app/build .:server/server/client-build 
 }
 }
 stage('building server') {
 steps {
 sh '''
-cd server
+cd ../server
 echo building docker image
 ....
 '''
+docker build -t  itayJenkinsServer
+docker run -d -p8001:8000 -name ohana itayJenkinsServer 
 }
 }
 stage('deploy server') {
