@@ -10,9 +10,9 @@ pipeline {
                     echo 'Building Client'
                     sh '''
                     cd client
-                    docker build -t korenClient .
-                    docker run --name korenContainer korenClient
-                    docker cp korenContainer:app/build ../server/client-build
+                    docker build -t koren_client .
+                    docker run --name koren_container koren_client
+                    docker cp koren_container:app/build ../server/client-build
                     '''
                 }
             }
