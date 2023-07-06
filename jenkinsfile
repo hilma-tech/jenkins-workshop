@@ -11,7 +11,7 @@ pipeline {
                     building client
                     cd client
                     docker image build -t client .
-                    docker run -name yehonatan client:latest
+                    docker run --name yehonatan client:latest
                     docker cp yehonatan:app/build ../server/client-build
                     '''
                 }
@@ -23,15 +23,8 @@ pipeline {
 cd server
 echo building docker image
 docker image build -t server .
-docker run -d -p$PORT:8000 -name yehonatan server:latest
+docker run -d -p$PORT:8000 --name yehonatan server:latest
 """
-            }
-        }
-        stage('deploy server') {
-            steps {
-                script {
-                    echo 'deploying'
-                }
             }
         }
 
