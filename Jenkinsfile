@@ -33,6 +33,7 @@ steps {
 script {
 echo 'deploying'
 sh '''
+docker stop noya-container-server || true
 docker container rm noya-container-server || true
 docker run -d -p 8088:8000 --name noya-container-server noya-docker-server
 '''
