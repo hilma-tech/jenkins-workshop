@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PORT = <your port>
+        PORT = 8000
     }
     stages {
         stage('build client') {
