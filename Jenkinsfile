@@ -8,6 +8,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        cd client
                         docker build -t client_image .
                         docker run --name my_container client_image
                         docker cp my_container:app/build ../server/client-build
