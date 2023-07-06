@@ -18,7 +18,7 @@ steps {
 cd server
 echo 'building docker image'
 docker build -t server
-
+docker run -d -p 8027:8000 --name bar-server server
 }
 }
 stage('deploy server') {
