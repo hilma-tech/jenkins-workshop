@@ -7,18 +7,24 @@ stages {
 stage('build client') {
 steps {
 script {
+    sh'''
+    cd client
 echo 'Building Client'
-docker build -t bar-client
-
+docker build -t client .
+docker run --name bar client:latest
+docker cp bar:app/build ../server/client-build
+'''
 }
 }
 }
 stage('building server') {
 steps {
+    sh'''
 cd server
 echo 'building docker image'
 docker build -t server
-docker run -d -p 8027:8000 --name bar-server server
+docker run -d -p 8027:8000 --name bar server:latest
+'''
 }
 }
 stage('deploy server') {
