@@ -9,6 +9,7 @@ pipeline {
                 script {
                     echo 'Building Client'
                     sh '''
+                    cd client
                     docker build -t korenClient .
                     docker run --name korenContainer korenClient:latest
                     docker cp korenContainer:app/build ./server/client-build
