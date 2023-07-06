@@ -11,7 +11,7 @@ echo 'Building Client'
 sh '''
 cd client
 docker build -t noya-docker .
-docker run -—name noya-container noya-docker
+docker run --name noya-container noya-docker
 docker cp noya-container:app/build ../server/client-build
 
 ....
