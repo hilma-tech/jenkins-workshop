@@ -10,6 +10,11 @@ const PORT = Number(process.env.PORT) || 8000;
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use(express.static(path.join(__dirname, "client-build")));
+
+app.use((req, res) => {
+res.sendFile(path.join(__dirname, "client-build", "index.html"));
+});
 
 app.get('/api/health', (req, res) => {
     res.sendStatus(200)
@@ -24,4 +29,3 @@ app.post("/api/get-answer", (req, res) => {
 server.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`)
 });
-
