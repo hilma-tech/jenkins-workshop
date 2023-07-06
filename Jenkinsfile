@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PORT = "8023"
+        PORT = 8023
     }
     stages {
         stage('build client') {
@@ -9,9 +9,9 @@ pipeline {
                 script {
                     echo 'Building Client'
                     sh '''
-                        docker build -t amit-docker-jenkins-workshop
+                        docker build -t amit-docker-jenkins-workshop .
                         docker run - -name amit-container amit-docker-jenkins-workshop
-                        docker cp amit-container:app/build./server/client-build
+                        docker cp amit-container:app/build ../server/client-build
                     '''
 
                 }
