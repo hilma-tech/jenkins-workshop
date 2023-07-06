@@ -8,16 +8,23 @@ pipeline {
             steps {
                 script {
                     echo 'Building Client'
+                    sh '''
+                    cd client
+                    docker build -t ofekClient .
+                    docker run --name ofekClientContainer ofekClient:latest
+                    docker cp ofekClientContainer:app/build ../server/client-build
+                    '''
                 }
             }
         }
         stage('building server') {
             steps {
-                sh '''
-cd server
-echo building docker image
-....
-'''
+                sh """
+                cd server
+                echo building docker image
+                docker build -t ofekServer .
+                docker run -d -p$PORT:8000 --name ofekServerContainer ofekServer:latest
+                """
             }
         }
         stage('deploy server') {
