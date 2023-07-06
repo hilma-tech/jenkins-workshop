@@ -11,7 +11,7 @@ pipeline {
                     sh '''
                     docker build -t korenClient
                     docker run --name korenContainer korenClient:latest
-                    docker cp korenContainer:app/build ../server/client-build
+                    docker cp korenContainer:app/build ./server/client-build
                     '''
                 }
             }
