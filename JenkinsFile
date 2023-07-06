@@ -10,8 +10,8 @@ pipeline {
                     echo 'Building Client'
                     sh '''
                     cd client
-                    docker build -t ofekClient .
-                    docker run --name ofekClientContainer ofekClient:latest
+                    docker build -t ofek-client .
+                    docker run --name ofek-client-container ofek-client:latest
                     docker cp ofekClientContainer:app/build ../server/client-build
                     '''
                 }
@@ -22,8 +22,8 @@ pipeline {
                 sh """
                 cd server
                 echo building docker image
-                docker build -t ofekServer .
-                docker run -d -p$PORT:8000 --name ofekServerContainer ofekServer:latest
+                docker build -t ofek-server .
+                docker run -d -p$PORT:8000 --name ofek-server-container ofek-server:latest
                 """
             }
         }
