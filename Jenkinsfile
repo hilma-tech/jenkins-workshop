@@ -10,7 +10,7 @@ script {
 echo 'Building Client'
 sh '''
 cd client
-docker build - t yotimage
+docker build - t yotimage .
 docker run -name yoticontainer yotimage 
 docker cp yoticontainer:app/build/../server/client-build
 '''
