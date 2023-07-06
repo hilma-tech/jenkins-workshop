@@ -7,17 +7,21 @@ pipeline {
         stage('build client') {
             steps {
                 script {
-                    echo 'Building Client'
+                    sh '''
+                        docker build -t client_image .
+                        docker run --name my_container client_image
+                        docker cp my_container:app/build ../server/client-build
+                    '''
                 }
             }
         }
         stage('building server') {
             steps {
                 sh '''
-cd server
-echo building docker image
-....
-'''
+                    cd server
+                    docker build -t my_server   .
+                    docker run -d -p 8078:8000 --name my_container my_server
+                '''
             }
         }
         stage('deploy server') {
