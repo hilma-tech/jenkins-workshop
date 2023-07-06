@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PORT = 8000
+        PORT = 8043
     }
     stages {
         stage('build client') {
@@ -20,9 +20,8 @@ pipeline {
             steps {
                 sh '''
 cd server
-echo building docker image
-docker build -t korenServer .
-docker run -d -p 8000:8000 --name korenContainer korenServer
+docker build -t ./server .
+docker run -d -p 8043:8000 -n korenContainer ./server
 '''
             }
         }
