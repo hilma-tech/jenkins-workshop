@@ -12,7 +12,7 @@ pipeline {
                     cd client
                     docker build -t ofek-client .
                     docker run --name ofek-client-container ofek-client:latest
-                    docker cp ofekClientContainer:app/build ../server/client-build
+                    docker cp ofek-client-container:app/build ../server/client-build
                     '''
                 }
             }
