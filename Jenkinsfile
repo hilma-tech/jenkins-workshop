@@ -26,7 +26,6 @@ sh '''
 cd server
 echo building docker image
 docker build -t noya-docker-server .
-....
 '''
 }
 }
@@ -36,7 +35,6 @@ script {
 echo 'deploying'
 sh '''
 docker run -d -p 8088:8000 --name noya-container-server noya-docker-server
-....
 '''
 }
 }
