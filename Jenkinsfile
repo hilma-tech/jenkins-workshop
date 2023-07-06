@@ -9,6 +9,7 @@ pipeline {
                 script {
                     echo 'Building Client'
                     sh '''
+                        cd client
                         docker build -t amit-docker-jenkins-workshop .
                         docker run - -name amit-container amit-docker-jenkins-workshop
                         docker cp amit-container:app/build ../server/client-build
@@ -21,7 +22,7 @@ pipeline {
             steps {
                 sh '''
                     echo building docker image
-                    build abd run server
+                    cd server
                     docker build -t amit-server .
                     docker run -d -p 8023:8000 - -name amit-server
                     ....
