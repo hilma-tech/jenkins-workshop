@@ -14,8 +14,6 @@ docker build -t noya-docker .
 docker container rm noya-container || true
 docker run --name noya-container noya-docker
 docker cp noya-container:app/build ../server/client-build
-
-....
 '''
 
 }
