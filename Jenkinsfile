@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build Client') {
             steps {
-                script {
+               sh
                     '''
                     echo 'Building Client'
                     cd client
@@ -19,7 +19,7 @@ pipeline {
                     docker cp client-container:app/build ../server/client-build
                     '''
                 }
-            }
+            
         }
         stage('Building Server') {
             steps {
@@ -34,15 +34,15 @@ pipeline {
         }
         stage('Deploy Server') {
             steps {
-                script {
-                    '''
+                
+                    sh '''
                         echo 'Deploying'
                         echo runing server docker continer
                         # docker run
                         docker run -d --name server-container -p 8080:$PORT  server-image
                     '''
                 }
-            }
+            
         }
         stage('Health Check') {
             steps {
