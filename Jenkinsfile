@@ -11,6 +11,8 @@ pipeline {
                     sh '''
                     cd client
                     echo building docker image
+                    docker stop zohar2  || true
+docker container rm zohar2 || true
                     docker build -t client .
                     docker run --name zohar2 client
 docker cp zohar2:app/build ../server/client-build
@@ -23,6 +25,8 @@ docker cp zohar2:app/build ../server/client-build
                 sh '''
                     cd server
                     echo building docker image
+                    docker stop elya  || true
+docker container rm elya || true
                     docker build -t server    .
 docker run -d -p 8111:8000 --name elya server
                     '''
