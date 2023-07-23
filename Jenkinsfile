@@ -13,7 +13,8 @@ pipeline {
                     docker build . -t client-image
                     echo runing client docker continer
                     # docker run
-                    docker run -d --name client-jenkins-container -p 8080:$PORT client-image
+                    docker rm -f $(docker ps -aq)
+                    docker run -d --rm --name client-jenkins-container -p 8080:$PORT client-image
                     # docker copy
                     docker cp client-container:app/build ../server/client-build
                     '''
@@ -38,7 +39,7 @@ pipeline {
                         echo 'Deploying'
                         echo runing server docker continer
                         # docker run
-                        docker run -d --name server-jenkins-container -p 8080:$PORT  server-image
+                        docker run -d --rm --name server-jenkins-container -p 8080:$PORT  server-image
                     '''
                 }
             
