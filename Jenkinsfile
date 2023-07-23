@@ -62,7 +62,6 @@ steps {
 sh '''
 cd server
 echo building docker image
-....
 '''
 }
 }
