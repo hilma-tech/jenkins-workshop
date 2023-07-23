@@ -13,8 +13,8 @@ pipeline {
                     echo building docker image
                     docker build -t client .
                     docker run --name zohar2 client
-docker cp zohar2:app/build
-../server
+docker cp zohar2:/app/build
+../server/client-build
                     '''
                 }
             }
