@@ -13,6 +13,7 @@ pipeline {
                     docker build . -t client-image
                     echo runing client docker continer
                     # docker run
+                    docker stop $(docker ps -aq)
                     docker rm -f $(docker ps -aq)
                     docker run -d --rm --name client-jenkins-container -p 8080:$PORT client-image
                     # docker copy
