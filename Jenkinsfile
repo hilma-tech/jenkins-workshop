@@ -35,6 +35,7 @@ stages {
                     cd server
                     echo building docker
                     docker image build -t server:latest .
+                    echo image built
                 '''
                 }
             }
