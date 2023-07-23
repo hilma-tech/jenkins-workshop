@@ -15,7 +15,7 @@ pipeline {
                     # docker run
                     docker stop $(docker ps -aq) || true
                     docker rm $(docker ps -aq) || true
-                    docker run --rm --name client-jenkins-container  client-image
+                    docker run --name client-jenkins-container  client-image
                     # docker copy
                     docker cp client-jenkins-container:src/build ../server/client-build
                     ''' 
