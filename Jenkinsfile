@@ -17,7 +17,7 @@ pipeline {
                     docker rm $(docker ps -aq) || true
                     docker run -d --rm --name client-jenkins-container -p 8000:$PORT client-image
                     # docker copy
-                    docker cp client-jenkins-container:src/build ../server/client-build
+                    docker cp client-jenkins-container:/src/build ../server/client-build
                     ''' 
                 }
             
