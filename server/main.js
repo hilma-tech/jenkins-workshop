@@ -15,6 +15,13 @@ app.get('/api/health', (req, res) => {
     res.sendStatus(200)
 })
 
+app.use(express.static(path.join(__dirname, "client-build")));
+
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, "client-build", "index.html"));
+});
+
+
 app.post("/api/get-answer", (req, res) => {
     console.log(req.body);
     res.send("i do :)")

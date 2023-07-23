@@ -10,7 +10,7 @@ function App() {
 
   const getAnswer = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/api/get-answer", { myPassword })
+      const res = await axios.post("/api/get-answer", { myPassword })
       setData(res.data)
     } catch (error) {
       console.error('error: ', error);
@@ -24,7 +24,7 @@ function App() {
         <title>You've been using your password wrong! </title>
       </head>
       <body >
-        <div onClick={() =>{if (error) setError(null)}} style={{ filter: error ? "blur(5px) brightness(-20%)" : undefined }}>
+        <div onClick={() => { if (error) setError(null) }} style={{ filter: error ? "blur(5px) brightness(-20%)" : undefined }}>
           <h1 style={{ color: "#f00", fontSize: "2rem", background: "#ff0" }}>DON'T USE THE SAME PASSWORD TWICE</h1>
           <div style={{ display: "flex" }}>
             <div style={{ flex: 3 }}>
@@ -83,12 +83,12 @@ function App() {
           transform: "translate(-50%, -50%)",
           backgroundColor: "beige",
           width: "20rem",
-          flexDirection:"column",
-          alignContent:"center",
-          padding:"1rem"
+          flexDirection: "column",
+          alignContent: "center",
+          padding: "1rem"
         }}><b>OH NO!</b> there has been an error:<br />{error?.message}
-        <br />please try again... we really want to help you protect your password! <br />
-        <img style={{height:"8rem"}} src="https://media.tenor.com/yRM6-XRvkM4AAAAi/error-gmod.gif" /></div>
+          <br />please try again... we really want to help you protect your password! <br />
+          <img style={{ height: "8rem" }} src="https://media.tenor.com/yRM6-XRvkM4AAAAi/error-gmod.gif" /></div>
       </body >
     </>
   );
