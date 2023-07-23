@@ -31,6 +31,7 @@ pipeline {
             steps {
                 echo 'health check:)'
                 sh """
+                sleep 20
 wget http://localhost:$PORT/api/health;
 if [ \$? = 0 ];
 then echo SUCCESS;
