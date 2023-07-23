@@ -60,6 +60,7 @@ stages {
 
     stage('health check') {
         steps {
+            script{
             echo 'health check:)'
             sh """
             wget http://localhost:$PORT/api/health;
@@ -68,6 +69,7 @@ stages {
             else echo FAILED:\\(;
             fi
             """
+            }
         }
 }
 
