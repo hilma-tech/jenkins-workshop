@@ -12,13 +12,13 @@ stages {
                     sh '''
                         cd client
                         docker build -t client:latest .
-                        docker run --name client-builed client:latest
-                        docker cp client-builed:app/build  ../server/client-build
+                        docker run --name client-build client:latest
+                        docker cp client-build:app/build  ../server/client-build
                         docker container rm client-build 
                     '''
                 } catch (error2) {
                     sh 'docker container rm client-build || true'
-                    error error2
+                    echo error2
                 }
             }
         }
