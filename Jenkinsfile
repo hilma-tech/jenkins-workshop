@@ -6,8 +6,7 @@ pipeline {
     stages {
         stage('Build Client') {
             steps {
-               sh
-                    '''
+               sh  '''
                     echo 'Building Client'
                     cd client
                     echo building client docker image
