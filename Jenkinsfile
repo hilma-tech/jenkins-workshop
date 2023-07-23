@@ -51,6 +51,7 @@ stages {
                     echo error
                 }
                 sh """
+                echo doecker running on port
                     docker run -d -p $PORT:8000 --name server-container server:latest
                 """
             }
