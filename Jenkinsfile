@@ -1,70 +1,48 @@
 pipeline {
     agent any
     environment {
-        PORT = 8010
+        PORT = 8102
     }
     stages {
         stage('build client') {
             steps {
-                script {
+                sh """
                     echo 'Building Client'
-                    try {
-                        sh '''
-                            cd client
-                            echo building docker image
-                            docker build -t client:latest .
-                            echo building \\& copying react build...
-                            docker run --name client-build client:latest
-                            docker cp client-build:app/build ../server/client-build
-                            echo finished copying, deleting stopped container
-                            docker container rm client-build 
-                        '''
-                    } catch (error2) {
-                        sh 'docker container rm client-build || true'
-                        error error2
-                    }
-                }
+                    cd client
+                    docker build . -t client-image
+                    docker run -d client -p 8080:$POST client-image
+                    docker cp client:/app/build ./server:/app 
+                """
             }
         }
         stage('building server') {
             steps {
-                sh '''
+                sh """
+                    echo building server
                     cd server
-                    echo building docker image
-                    docker build -t server:latest .
-                '''
+                    docker build . -t server-image
+                """
             }
         }
         stage('deploy server') {
             steps {
-                script {
-                    echo 'deploying'
-                    try{
-                        sh 'docker stop server-container || true && docker rm server-container || true'
-                    }
-                    catch(error){
-                        echo error
-                    }
-                    sh """
-                        docker run -d -p $PORT:8000 --name server-container server:latest
-                    """
-                }
+                sh """
+                    echo deploying
+                    docker run -d server -p 8080:$POST server-image 
+                """
             }
         }
-
         stage('health check') {
             steps {
                 echo 'health check:)'
                 sh """
                     wget http://localhost:$PORT/api/health;
-                    if [ \$? = 0 ]; 
+                    if [ \$? = 0 ];
                     then echo SUCCESS;
-                    else echo FAILED:\\(;
+                    else echo FAILED:(;
                     fi
                 """
             }
         }
     }
 }
-
-
