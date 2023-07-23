@@ -6,9 +6,9 @@ pipeline {
 stages {
     stage('build client') {
         steps {
-            try{
             script {
                 echo 'Building Client'
+            try{
                 sh '''
                     cd client
                     echo building docker
@@ -22,10 +22,11 @@ stages {
                     echo container removed
                 '''
                 }
-            }catch(error){
+            catch(error){
                 sh 'docker container rm client-build || true'
                 error error
             }
+         }
     }
 }
     stage('building server') {
