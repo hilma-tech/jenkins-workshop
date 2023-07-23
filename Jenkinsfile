@@ -16,6 +16,7 @@ pipeline {
     docker image build -t client .
     docker run --name ${DOCKER_NAME_CLIENT} client
     docker cp ${DOCKER_NAME_CLIENT}:docker/build ./build
+    sudo snap install serve
     serve build
     cd ../
 '''
