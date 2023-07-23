@@ -48,7 +48,7 @@ fi
 pipeline {
 agent any
 environment {
-PORT = <your port>
+PORT = 8110
 }
 stages {
 stage('build client') {
