@@ -3,8 +3,8 @@ pipeline {
     agent any
     environment {
         PORT = 8109
-        DOCKER_NAME_CLIENT = 'jenkins'
-        DOCKER_NAME_SERVER = 'jenkins-2'
+        DOCKER_NAME_CLIENT = 'avigail-avital-client'
+        DOCKER_NAME_SERVER = 'avigail-avital-server'
     }
     stages {
         stage('build client') {
@@ -15,9 +15,7 @@ pipeline {
     cd client
     docker image build -t client .
     docker run --name ${DOCKER_NAME_CLIENT} client
-    docker cp ${DOCKER_NAME_CLIENT}:docker/build ./build
-    sudo snap install serve
-    serve build
+    docker cp ${DOCKER_NAME_CLIENT}:docker/build ../server/client-build
     cd ../
 '''
                 }
@@ -29,7 +27,6 @@ pipeline {
     cd server
     echo building docker image
     docker image build -t server .
-    docker run -p 8000:8000 --name ${DOCKER_NAME_SERVER} server
 '''
             }
         }
@@ -37,6 +34,9 @@ pipeline {
             steps {
                 script {
                     echo 'deploying'
+                    sh '''
+                        docker run -p ${PORT}:${PORT} --name ${DOCKER_NAME_SERVER} server
+                    '''
                 }
             }
         }
