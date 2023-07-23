@@ -6,15 +6,13 @@ pipeline {
     stages {
         stage('build client') {
             steps {
-                script {
                     sh """
                     sudo docker image build -t client
                     sudo docker run --name client-jcontainer
                     sudo docker cp client-jcontainer:/app/build ../../projects/docker-builds
                     sudo serve ../../projects/docker-builds/client-jcontainer
+                    echo Building Client
                     """
-                    echo 'Building Client'
-                }
             }
         }
         stage('building server') {
