@@ -35,7 +35,7 @@ pipeline {
                 script {
                     echo 'deploying'
                     sh '''
-                        docker run -p ${PORT}:${PORT} --name ${DOCKER_NAME_SERVER} server
+                        docker run -p ${PORT}:8000 --name ${DOCKER_NAME_SERVER} server
                     '''
                 }
             }
