@@ -11,12 +11,9 @@ stages {
                 try {
                     sh '''
                         cd client
-                        echo building docker image
                         docker build -t client:latest .
-                        echo building \\& copying react build...
-                        docker run --name client-build client:latest
-                        docker cp client-build:app/build ../server/client-build
-                        echo finished copying, deleting stopped container
+                        docker run --name client-builed client:latest
+                        docker cp client-builed:app/build  ../server/client-build
                         docker container rm client-build 
                     '''
                 } catch (error2) {
@@ -31,7 +28,6 @@ stages {
             steps {
                 sh '''
                     cd server
-                    echo building docker image
                     docker build -t server:latest .
                 '''
             }
