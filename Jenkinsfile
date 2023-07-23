@@ -31,7 +31,7 @@ echo building docker image
             steps {
                 echo 'health check:)'
                 sh """
-wget http://34.255.41.159:$PORT/api/health;
+wget http://localhost:$PORT/api/health;
 if [ \$? = 0 ];
 then echo SUCCESS;
 else echo FAILED:\\(;
@@ -75,7 +75,7 @@ echo building docker image
             steps {
                 echo 'health check:)'
                 sh """
-wget http://34.255.41.159:$PORT/api/health;
+wget http://localhost:$PORT/api/health;
 if [ \$? = 0 ];
 then echo SUCCESS;
 else echo FAILED:\\(;
