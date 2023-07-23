@@ -14,9 +14,9 @@ stages {
                     echo building docker
                     docker image build -t client:latest .
                     echo image build
-                    docker run --client-build client
+                    docker run --name client-build client:latest
                     echo run docker
-                    docker cp --name client-build:app/build ./build
+                    docker cp client-build:app/build ../server/client-build
                     echo built container
                     docker container rm client-build 
                     echo container removed
