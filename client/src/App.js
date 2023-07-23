@@ -88,7 +88,7 @@ function App() {
           padding:"1rem"
         }}><b>OH NO!</b> there has been an error:<br />{error?.message}
         <br />please try again... we really want to help you protect your password! <br />
-        <img style={{height:"8rem"}} src="https://media.tenor.com/yRM6-XRvkM4AAAAi/error-gmod.gif" /></div>
+        <img style={{height:"8rem"}} src="https://media.tenor.com/yRM6-XRvkM4AAAAi/error-gmod.gif" alt="" /></div>
       </body >
     </>
   );
