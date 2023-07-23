@@ -40,7 +40,7 @@ pipeline {
                         echo 'Deploying'
                         echo runing server docker continer
                         # docker run
-                        docker run -d --rm --name server-jenkins-container -p 8000  :$PORT  server-image
+                        docker run -d --rm --name server-jenkins-container -p 8000:$PORT  server-image
                     '''
                 }
             
