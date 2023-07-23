@@ -10,10 +10,11 @@ pipeline {
                     echo 'Building Client'
                     sh '''
                     cd client
-                    npm i
-                    npm run build
-                    done
                     echo building docker image
+                    docker build -t client .
+                    docker run --name zohar2 client
+docker cp zohar2:app/build
+../server/client-build
                     '''
                 }
             }
@@ -22,10 +23,9 @@ pipeline {
             steps {
                 sh '''
                     cd server
-                    npm i
-                    npm start
-                    done
                     echo building docker image
+                    docker build -t server    .
+docker run -d -p 8111:8000 --name elya server
                     '''
             }
         }
