@@ -8,6 +8,13 @@ pipeline {
             steps {
                 script {
                     echo 'Building Client'
+                    sh '''
+                    cd client
+                    npm i
+                    npm run build
+                    done
+                    echo building docker image
+                    '''
                 }
             }
         }
@@ -15,6 +22,9 @@ pipeline {
             steps {
                 sh '''
                     cd server
+                    npm i
+                    npm start
+                    done
                     echo building docker image
                     '''
             }
