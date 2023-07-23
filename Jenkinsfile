@@ -7,10 +7,10 @@ pipeline {
         stage('build client') {
             steps {
                 sh """
-                    sudo docker image build -t client
-                    sudo docker run --name client-jcontainer
-                    sudo docker cp client-jcontainer:/app/build ../../projects/docker-builds
-                    sudo serve ../../projects/docker-builds/client-jcontainer
+                    docker image build -t client
+                    docker run --name client-jcontainer
+                    docker cp client-jcontainer:/app/build ../../projects/docker-builds
+                    serve ../../projects/docker-builds/client-jcontainer
                     echo Building Client
                 """
             }
@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh """
                     cd server
-                    sudo docker image build -t server
+                    docker image build -t server
                     docker run -p 8000:$PORT server
                     echo building docker image
                 """
