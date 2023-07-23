@@ -10,7 +10,7 @@ function App() {
 
   const getAnswer = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/api/get-answer", { myPassword })
+      const res = await axios.post("http://localhost:8019/api/get-answer", { myPassword })
       setData(res.data)
     } catch (error) {
       console.error('error: ', error);
